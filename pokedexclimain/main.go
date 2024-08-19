@@ -3,15 +3,17 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"github.com/neet-007/pokeapi"
 	"os"
 	"strings"
+	"time"
+
+	"github.com/neet-007/pokeapi"
 )
 
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	confing := pokeapi.Config{
-		Client: pokeapi.NewClient(),
+		Client: pokeapi.NewClient(time.Hour),
 	}
 	for {
 		fmt.Print("pokedex >")
@@ -73,6 +75,11 @@ func getCommands() map[string]cliCommand {
 			description: "Similar to the map command, however, instead of displaying the next 20 locations,",
 			callback:    mapbCommand,
 		},
+		"exploer": {
+			name: "explore",
+			description: "explore",
+			callback: exploreCommand,
+		}
 	}
 }
 
