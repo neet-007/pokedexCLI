@@ -3,12 +3,16 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"github.com/neet-007/pokeapi"
 	"os"
 	"strings"
 )
 
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
+	confing := pokeapi.Config{
+		Client: pokeapi.NewClient(),
+	}
 	for {
 		fmt.Print("pokedex >")
 
@@ -30,7 +34,11 @@ func main() {
 			continue
 		}
 
-		command.callback()
+		err := command.callback(&confing)
+		if err != nil {
+			fmt.Printf("error %s\n", err)
+			continue
+		}
 
 	}
 }
@@ -38,7 +46,7 @@ func main() {
 type cliCommand struct {
 	name        string
 	description string
-	callback    func() error
+	callback    func(config *pokeapi.Config) error
 }
 
 func getCommands() map[string]cliCommand {
@@ -52,6 +60,18 @@ func getCommands() map[string]cliCommand {
 			name:        "exit",
 			description: " Exit the Pokedex",
 			callback:    exitCommand,
+		},
+		"map": {
+
+			name:        "map",
+			description: "The map command displays the names of 20 location areas in the Pokemon world",
+			callback:    mapCommand,
+		},
+		"mapb": {
+
+			name:        "map",
+			description: "Similar to the map command, however, instead of displaying the next 20 locations,",
+			callback:    mapbCommand,
 		},
 	}
 }
