@@ -48,7 +48,7 @@ func main() {
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(config *pokeapi.Config) error
+	callback    func(config *pokeapi.Config, args ...string) error
 }
 
 func getCommands() map[string]cliCommand {
@@ -76,10 +76,10 @@ func getCommands() map[string]cliCommand {
 			callback:    mapbCommand,
 		},
 		"exploer": {
-			name: "explore",
+			name:        "explore {location name}",
 			description: "explore",
-			callback: exploreCommand,
-		}
+			callback:    exploreCommand,
+		},
 	}
 }
 

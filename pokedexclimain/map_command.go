@@ -6,7 +6,7 @@ import (
 	"log"
 )
 
-func mapCommand(config *pokeapi.Config) error {
+func mapCommand(config *pokeapi.Config, args ...string) error {
 	locations, err := config.Client.ListLocations(config.Next)
 
 	if err != nil {

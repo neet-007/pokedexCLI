@@ -5,7 +5,7 @@ import (
 	"github.com/neet-007/pokeapi"
 )
 
-func helpCommand(config *pokeapi.Config) error {
+func helpCommand(config *pokeapi.Config, args ...string) error {
 	fmt.Println("Welcome to the Pokedex!")
 	fmt.Println("Usage:")
 	fmt.Println()

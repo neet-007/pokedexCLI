@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func exitCommand(config *pokeapi.Config) error {
+func exitCommand(config *pokeapi.Config, args ...string) error {
 	os.Exit(0)
 	return nil
 }

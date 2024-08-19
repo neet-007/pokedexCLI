@@ -8,7 +8,7 @@ import (
 func TestCreateCache(t *testing.T) {
 	cache := NewCache(time.Second)
 
-	if cache == nil {
+	if cache.CacheMap == nil {
 		t.Error("cache is empty")
 	}
 }
@@ -88,7 +88,7 @@ func TestReapCacheFail(t *testing.T) {
 
 	cache.Add(case_.key, case_.val)
 
-	time.Sleep(interval / 4)
+	time.Sleep(interval / 2)
 
 	v, ok := cache.Get(case_.key)
 	if !ok {

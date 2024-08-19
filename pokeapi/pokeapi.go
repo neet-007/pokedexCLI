@@ -92,7 +92,7 @@ func NewClient(interval time.Duration) Client {
 		httpClient: http.Client{
 			Timeout: time.Minute,
 		},
-		Cache: *pokecache.NewCache(interval),
+		Cache: pokecache.NewCache(interval),
 	}
 }
 

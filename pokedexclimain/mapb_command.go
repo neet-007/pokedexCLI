@@ -7,7 +7,7 @@ import (
 	"log"
 )
 
-func mapbCommand(config *pokeapi.Config) error {
+func mapbCommand(config *pokeapi.Config, args ...string) error {
 	if config.Previous == nil {
 		return errors.New("you are in the first page")
 	}
