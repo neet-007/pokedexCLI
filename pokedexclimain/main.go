@@ -13,7 +13,8 @@ import (
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	confing := pokeapi.Config{
-		Client: pokeapi.NewClient(time.Hour),
+		Client:     pokeapi.NewClient(time.Hour),
+		PokemonMap: map[string]pokeapi.PokemonResponse{},
 	}
 	for {
 		fmt.Print("pokedex >")
@@ -29,6 +30,11 @@ func main() {
 			continue
 		}
 
+		args := []string{}
+
+		if len(text) > 1 {
+			args = text[1:]
+		}
 		commands := getCommands()
 
 		command, ok := commands[text[0]]
@@ -36,7 +42,7 @@ func main() {
 			continue
 		}
 
-		err := command.callback(&confing)
+		err := command.callback(&confing, args...)
 		if err != nil {
 			fmt.Printf("error %s\n", err)
 			continue
@@ -75,10 +81,15 @@ func getCommands() map[string]cliCommand {
 			description: "Similar to the map command, however, instead of displaying the next 20 locations,",
 			callback:    mapbCommand,
 		},
-		"exploer": {
-			name:        "explore {location name}",
-			description: "explore",
+		"explore": {
+			name:        "explore",
+			description: "explore {loaction name}",
 			callback:    exploreCommand,
+		},
+		"catch": {
+			name:        "catch",
+			description: "catch {pokemon name}",
+			callback:    catchCommand,
 		},
 	}
 }

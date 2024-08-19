@@ -17,7 +17,7 @@ func exploreCommand(config *pokeapi.Config, args ...string) error {
 		return err
 	}
 
-	fmt.Println("the pokemons in location %s", location.Name)
+	fmt.Printf("the pokemons in location %s\n", location.Name)
 	for _, pokemon := range location.PokemonEncounters {
 		fmt.Printf("-%s\n", pokemon.Pokemon.Name)
 	}
